@@ -8,6 +8,10 @@ Useful Sage X3 ERP code.
 
 Returns the number of a month, given the name in a language.
 
+[Funprog MIN_DT](Dates/YMINDT.src)
+
+Returns the number of minutes between two datetimes.
+
 ## Files
 
 [Funprog GET_FILE_IN_DIRECTORY](Files/YGETFILEINDIRECTORY.src)
