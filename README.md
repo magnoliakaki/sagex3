@@ -20,6 +20,10 @@ Returns the SYSTEME2 parameter (i.e. the cmd command) to find all files in a dir
 
 Removes all patterns found in the 2nd parameter from the string (or list of strings) in the first parameter.
 
+[Funprog ISITSPECIAL](Strings/YISITSPECIAL.src)
+
+Checks wether a strings contains a special character.
+
 ## Generic
 
 [Funprog ANNULLO_MOVCONTABILE](Generic/YANULMOVCONT.src)
