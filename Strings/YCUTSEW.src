@@ -1,0 +1,31 @@
+#############################################################
+# CUTSEW 
+# Removes all patterns found in the 2nd parameter from the string (or list of strings) in the first parameter
+# @param    CHARS (char) : variable or variable list 
+# @param    PATTERN (char) : pattern or list of patterns to remove from CHARS
+
+Subprog CUTSEW(CHARS,PATTERN)
+Variable Char CHARS   ()()
+Value Char PATTERN  ()()
+
+  # gli indici di CHARS e PATTERN devono necessariamente partire da 0
+  Local Char     TEMP_STR(250), TEMP_FIN(250)
+  Local Integer  MIDX1 : MIDX1=dim(CHARS)
+  Local Integer  MIDX2 : MIDX2=dim(PATTERN)
+  Local Integer  JJ, KK
+  Local Integer  RANK, STRLEN
+
+  For JJ=0 To MIDX1-1
+      For KK=0 To MIDX2-1
+          While instr(0,CHARS(JJ),PATTERN(KK))<>0
+              RANK   = instr(0,CHARS(JJ),PATTERN(KK))
+              STRLEN = len(CHARS(JJ))
+
+              TEMP_STR = seg$(CHARS(JJ),1,RANK-1)
+              TEMP_FIN = seg$(CHARS(JJ),RANK+1,STRLEN)
+
+              CHARS(JJ) = TEMP_STR + TEMP_FIN
+          Wend
+      Next KK
+  Next JJ
+End

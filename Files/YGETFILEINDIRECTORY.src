@@ -14,6 +14,7 @@
 # @param    SORT (integer) : 
 #               0 = no ordering
 #               1 = ascending alphabetical ordering 
+# You can find an example at the end of the file.
 
 Funprog GET_FILE_IN_DIRECTORY(PATH, PREFISSO, ESTENSIONE, FILE_ONLY, SUBDIRECTORIES, SORT)
     Variable Char   PATH()
@@ -51,3 +52,25 @@ Funprog GET_FILE_IN_DIRECTORY(PATH, PREFISSO, ESTENSIONE, FILE_ONLY, SUBDIRECTOR
     Endif
 End COMANDO
 
+# Example
+
+$EXAMPLE 
+    Local Char COM(250)
+    Local Char IMPORT_DIRECTORY (250) : [L]IMPORT_DIRECTORY = filpath("IMPORT\Directory", "", "")
+    Local Char IMPORT_PATH (250)
+    Local Char FILESLIST ([V]GDIMFIC) (0..1000)
+    Local Integer FC, FILESCOUNT, J
+
+    # Find all files in IMPORT_DIRECTORY of extension csv 
+    [L]COM = func GET_FILE_IN_DIRECTORY([L]IMPORT_DIRECTORY, "", "csv", 1, 0, 0)
+    Call SYSTEME2(adxmac(-1), [L]COM, "", [L]FC, [L]FILESLIST) From ORDSYS
+    [L]FILESCOUNT = min([L]FC, dim([L]FILESLIST))
+    # FILESCOUNT is the number of found files
+    # FILESLIST is the list of the files 
+
+    For J = 0 To [L]FILESCOUNT - 1
+        [L]FILNAM = left$([L]FILESLIST(J), instr(0, [L]FILESLIST(J), ".") -1)
+        # This will give the path to a single file:
+        [L]IMPORTPATH = filpath([L]IMPORT_DIRECTORY, [L]FILNAM, "csv")
+    Next J
+Return 

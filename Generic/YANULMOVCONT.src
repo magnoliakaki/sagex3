@@ -1,0 +1,23 @@
+# ANNULLO_MOVCONTABILE returns integer 
+# Annulla movimento contabile dato il tipo ed il numero
+# @param    TIPO (char) : tipo movimento contabile
+# @param    MOVIMENTO (char) : NUMERO MOVIMENTO CONTABILE
+# Ritorna GOK per sapere se è andato a buon fine l'annullamento
+
+Funprog ANNULLO_MOVCONTABILE(TIPO,MOVIMENTO)
+Value Char TIPO
+Value Char MOVIMENTO
+
+    Local Char YTIPO(10)     : YTIPO = TIPO
+    Local Char YMOVIMENTO(50): YMOVIMENTO = MOVIMENTO
+
+    If clalev([F:HAE])=0 : Local File GACCENTRY  [HAE] : Endif
+    If clalev([F:DAE])=0 : Local File GACCENTRYD [DAE] : Endif
+    If clalev([F:DAA])=0 : Local File GACCENTRYA [DAA] : Endif
+    If clalev([F:DUD])=0 : Local File GACCDUDATE [DUD] : Endif
+    If clalev([F:TVD])=0 : Local File TRCVCRDOC  [TVD] : Endif
+    If clalev([F:BAL])=0 : Local File BALANCE    [BAL] : Endif
+    If clalev([F:BLA])=0 : Local File BALANA    [BLA] : Endif
+    If clalev([F:XDP])=0 : Local File XXI001XDP    [XDP] : Endif
+    Call ANUPCE(YTIPO,YMOVIMENTO,0) From ANUBIC
+End GOK
