@@ -1,0 +1,17 @@
+#############################################################
+# NMONTH returns integer 
+# Returns the number of a month, given its name 
+# @param    NAMEMONTH (char) : name of the month
+# @param    LAN (char) : language 
+# Returns 0 if it didn't find anything 
+
+Funprog NMONTH(NAMEMONTH, LAN)
+  Value Char NAMEMONTH
+  Value Char LAN
+  Local Integer NM : NM=0
+  If clalev([F:APL])=0 : Local File APLSTD [APL] : Endif
+
+  For [F:APL] Where LAN=LAN and LANCHP=961 and toupper(LANMES)=toupper(NAMEMONTH)
+      NM=[APL]LANNUM
+  Next
+End NM

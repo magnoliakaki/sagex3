@@ -1,0 +1,53 @@
+#############################################################
+# GET_FILE_IN_DIRECTORY returns char 
+# Returns the SYSTEME2 parameter (i.e. the cmd command) to find all files in a directory 
+# @param    PATH (char) : relative or absolute path
+# @param    PREFISSO (char) : files prefix
+# @param    ESTENSIONE (char) : files extension 
+# @param    FILE_ONLY (integer) :
+#               0 = all files types
+#               1 = only files that are not directories
+#               2 = only directories 
+# @param    SUBDIRECTORIES (integer) : 
+#               0 = this directory
+#               2* = this directory and all its subdirectories (* the command will return the file path, not the name+extension)
+# @param    SORT (integer) : 
+#               0 = no ordering
+#               1 = ascending alphabetical ordering 
+
+Funprog GET_FILE_IN_DIRECTORY(PATH, PREFISSO, ESTENSIONE, FILE_ONLY, SUBDIRECTORIES, SORT)
+    Variable Char   PATH()
+    Value Char      PREFISSO()
+    Value Char      ESTENSIONE()
+    Value Integer   FILE_ONLY
+    Value Integer   SUBDIRECTORIES
+    Value Integer   SORT
+    Local Char      COMANDO(250)
+    PATH = filpath(PATH,"","")
+    COMANDO = "dir"
+    If (PATH<> "")
+        COMANDO -= PATH
+    Endif
+    COMANDO+="\"
+    If (PREFISSO<>"")
+        COMANDO +=PREFISSO
+    Endif
+    COMANDO+="*."
+    If (ESTENSIONE<>"")
+        COMANDO+=ESTENSIONE
+    Else
+        COMANDO+="*"
+    Endif
+    Case FILE_ONLY
+        When 1 : COMANDO-= "/a-d"
+        When 2 : COMANDO-= "/ad"
+    Endcase
+    If(SUBDIRECTORIES)
+        COMANDO-="/s"
+    Endif
+    COMANDO-= "/b 2>nul"
+    If(SORT)
+        COMANDO -= "| sort"
+    Endif
+End COMANDO
+
