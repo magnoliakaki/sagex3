@@ -1,0 +1,27 @@
+# Action SEL_TABLE
+
+$SEL_TABLE
+
+	If clalev([F:YCR])=0 : Local File YEXAMPLE [F:YCR] : Endif
+	
+	Filter [F:YCR] Where F1 = [M:YCAR]YCAR Order By PROG Desc; VCRNUM Asc 
+	
+	# Alias of the table you're doing the selection on (can also be the alias of a Link)
+	Default File [YCR]
+	
+	# Sorting (can be the same or different to the one used in the Filter)
+	ORDRE = "[F:YCR]PROG desc; [F:YCR]VCRNUM"
+	# Field selected (i.e. its value gets passed to VALEUR)
+	START = "[F:YCR]PACNUM"
+	
+	# Title of the window 
+	TIT(0) = "Selection"
+	
+	NBCOL = 0
+	# Value of the column 
+	NBCOL += 1 : COL(NBCOL) = "[F:YCR]F1" 
+	# Title of the column 
+	TIT(NBCOL)='Field 1'
+	NBCOL += 1 : COL(NBCOL) = "[F:YCR]F2" : TIT(NBCOL)='Field 2'
+
+Return
