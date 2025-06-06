@@ -18,7 +18,7 @@ The **Sage X3** repository aims to centralize commonly used 4GL/Progress code sn
 
 ## Repository Structure
 
-- [Actions](#actions)
+- [Actions](Actions/)
 - [DevelopmentsExamples](#developmentsexamples)
 - [NewFunctions](#newfunctions)
 - [Commands.src](#commandssrc)
