@@ -18,14 +18,25 @@ The **Sage X3** repository aims to centralize commonly used 4GL/Progress code sn
 
 ## Repository Structure
 
-- [Actions](Actions/)
-- [DevelopmentsExamples](#developmentsexamples)
-- [NewFunctions](#newfunctions)
-- [Commands.src](#commandssrc)
+#### [Actions](Actions/)
+
+Examples of use for X3 standard actions.
+
+#### [DevelopmentsExamples](DevelopmentsExamples/)
+
+Real-life examples of developments. 
+
+#### [NewFunctions](NewFunctions/)
+
+List of functions not in Sage's standard repository.
+
+#### [Commands.src](Commands.src)
+
+List of key words and commands.
 
 ## Functions Reference
 
-
+Read the readme inside each folder for a table of contents.
 
 
 
