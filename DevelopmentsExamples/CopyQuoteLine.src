@@ -1,0 +1,121 @@
+# New button on OSQH window (Quotes) that copy the selected lines on the quotes
+# in new, identical lines 
+
+# Modified file = SPESQH 
+
+$ACTION
+    Case ACTION
+        When "EXEBOUT" : GOSUB EXEBOUT 
+    Endcase
+Return 
+
+$EXEBOUT
+    Case BOUT 
+        When '6' : Gosub COPY_QUOTE_LINE
+    Endcase  
+Return 
+
+$COPY_QUOTE_LINE 
+    Default Mask [SQH2]
+
+    Local Integer JJ, LIG, YYMAXLGI, YYSTAT 
+    Local Char YCLOB (30)
+
+    If clalev([F:YDUPSQD])=0 : Local File SQUOTED [YDUPSQD] : Endif
+    [L]YYMAXLIG = max([M:SQH2]SQDLIN(0..[M:SQH2]NBLIG-1))
+    [S]nolign = [M:SQH2]NBLIG
+
+    Gosub AVANT_MOD From SUBSQHA
+
+    For [L]JJ to [M:SQH2]NBLIG - 1
+
+        # YCOPY is a new M1 field on SQH2 tracking which lines the user selected to duplicate
+        If [M:SQH2]YCOPY (JJ) = 2
+            Read [F:YDUPSQD]SQD0 = [M:SQH0]SQHNUM; [M:SQH2]SQDLIN(JJ)
+            If ![S]fstat
+
+                [S]nolign += 1
+                Raz [S]mkstat 
+
+                Gosub CHARGE_LINE 
+
+                If ![S]mkstat 
+                    [L]YYMAXLIG += 1000
+                    [M:SQH2]SQDLIN(nolign-1) = [L]YYMAXLIG
+                Else 
+                    [V]GERR = 1
+                    [V]GMESSAGE = "Error on copying line " - num$([M:SQH2]SQDLIN(JJ))
+                    [S]nolign -= 1
+                Endif 
+            Endif 
+        Endif
+    Next [L]JJ
+    
+
+    [M:SQH2]NBLIG = [S]nolign
+    Affzo [M:SQH2]
+
+    # Makes SQH goes into modification status
+    REP = 'M' : GREP = REP
+
+    # Revert default mask
+    Default Mask [SQH0]
+Return 
+
+$CHARGE_LINE
+    Call AVANT_NBLIG From W1SQH2
+    Raz [M:SQH2]YCOPY (JJ)
+
+    [M:SQH2] = [F:YDUPSQD]
+
+    [M:SQH2] = [F:YDUPSQD]
+
+    Call AP_ITMREF([M:SQH2]ITMREF(nolign-1)) From W1SQH2
+    Affzo [M:SQH2]
+
+    Call AM_ITMREF([M:SQH2]ITMREF(nolign-1)) From W1SQH2
+    Affzo [M:SQH2]
+
+    Call C_QTY([M:SQH2]QTY(nolign-1)) From W1SQH2
+    If [S]mkstat : Return : Endif
+    Affzo [M:SQH2]
+
+    Call AM_QTY([M:SQH2]QTY(nolign-1))       From W1SQH2
+    Affzo [M:SQH2]
+
+    Call C_GROPRI([M:SQH2]GROPRI(nolign-1))  From W1SQH2
+    If [S]mkstat : Return : Endif
+    Affzo [M:SQH2]
+
+    Call AM_GROPRI([M:SQH2]GROPRI(nolign-1)) From W1SQH2
+    Affzo [M:SQH2]
+
+    Call AM_DISCRGVAL1([M:SQH2]DISCRGVAL1(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL2([M:SQH2]DISCRGVAL2(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL3([M:SQH2]DISCRGVAL3(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL4([M:SQH2]DISCRGVAL4(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL5([M:SQH2]DISCRGVAL5(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL6([M:SQH2]DISCRGVAL6(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL7([M:SQH2]DISCRGVAL7(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL8([M:SQH2]DISCRGVAL8(nolign-1)) From W1SQH2
+    Call AM_DISCRGVAL9([M:SQH2]DISCRGVAL9(nolign-1)) From W1SQH2
+    Affzo [M:SQH2]
+
+    Call AM_CPRPRI([M:SQH2]CPRPRI(nolign-1)) From W1SQH2
+    Affzo [M:SQH2]
+
+    [L]YCLOB = [M:SQH2]SQDTEX (JJ)
+    Call DUP_CLOB("SQD",YCLOB,YYSTAT) From TRTX3TEX
+    Call CRE_CLOB(YCLOB,YYSTAT) From TRTX3TEX
+    [M:SQH2]SQDTEX(nolign-1) = [L]YCLOB
+
+    [M:SQH2]CREFLG(nolign-1)  = 0
+    [M:SQH2]UPDFLG(nolign-1)  = 1
+
+    Call APRES_NBLIG From W1SQH2
+Return 
+
+
+
+
+

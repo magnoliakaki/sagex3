@@ -1,0 +1,51 @@
+#############################################################
+# ISITSPECIAL returns integer 
+# Returns wether a string contains a special character or not (2 if it does, 0 if it doesn't)
+# @param    STRINGA (char) : string to check
+
+Funprog ISITSPECIAL(STRINGA)
+  Value Char STRINGA
+    Local Integer MAX_CARATTERI : [L]MAX_CARATTERI = 36
+    Local Char CARATTERI_SPECIALI (1) ([L]MAX_CARATTERI)
+    Local Integer J
+    [L]CARATTERI_SPECIALI(0) = '!'
+    [L]CARATTERI_SPECIALI(1) = '"'
+    [L]CARATTERI_SPECIALI(2) = '$'
+    [L]CARATTERI_SPECIALI(3) = '&'
+    [L]CARATTERI_SPECIALI(4) = '/'
+    [L]CARATTERI_SPECIALI(5) = '('
+    [L]CARATTERI_SPECIALI(6) = ')'
+    [L]CARATTERI_SPECIALI(7) = '='
+    [L]CARATTERI_SPECIALI(8) = '?'
+    [L]CARATTERI_SPECIALI(9) = '^'
+    [L]CARATTERI_SPECIALI(10) = "'"
+    [L]CARATTERI_SPECIALI(11) = '*'
+    [L]CARATTERI_SPECIALI(12) = '@'
+    [L]CARATTERI_SPECIALI(13) = '#'
+    [L]CARATTERI_SPECIALI(14) = 'ù'
+    [L]CARATTERI_SPECIALI(15) = '\'
+    [L]CARATTERI_SPECIALI(16) = '|'
+    [L]CARATTERI_SPECIALI(17) = 'ì'
+    [L]CARATTERI_SPECIALI(18) = ','
+    [L]CARATTERI_SPECIALI(19) = ';'
+    [L]CARATTERI_SPECIALI(20) = ':'
+    [L]CARATTERI_SPECIALI(21) = '.'
+    [L]CARATTERI_SPECIALI(22) = '-'
+    [L]CARATTERI_SPECIALI(23) = '_'
+    [L]CARATTERI_SPECIALI(24) = '<'
+    [L]CARATTERI_SPECIALI(25) = '>'
+    [L]CARATTERI_SPECIALI(26) = '+'
+    [L]CARATTERI_SPECIALI(27) = '€'
+    [L]CARATTERI_SPECIALI(28) = '['
+    [L]CARATTERI_SPECIALI(29) = ']'
+    [L]CARATTERI_SPECIALI(30) = '{'
+    [L]CARATTERI_SPECIALI(31) = '}'
+    [L]CARATTERI_SPECIALI(32) = '§'
+    [L]CARATTERI_SPECIALI(33) = '°'
+    [L]CARATTERI_SPECIALI(34) = 'è'
+    [L]CARATTERI_SPECIALI(35) = 'é'
+
+    For [L]J = 0 To [L]MAX_CARATTERI - 1
+        If instr(1, [L]STRINGA, [L]CARATTERI_SPECIALI([L]J)) > 0 : End 2 : Endif
+    Next [L]J
+End 0

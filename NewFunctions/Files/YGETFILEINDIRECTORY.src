@@ -17,12 +17,12 @@
 # You can find an example at the end of the file.
 
 Funprog GET_FILE_IN_DIRECTORY(PATH, PREFISSO, ESTENSIONE, FILE_ONLY, SUBDIRECTORIES, SORT)
-    Variable Char   PATH()
-    Value Char      PREFISSO()
-    Value Char      ESTENSIONE()
-    Value Integer   FILE_ONLY
-    Value Integer   SUBDIRECTORIES
-    Value Integer   SORT
+Variable Char   PATH()
+Value Char      PREFISSO()
+Value Char      ESTENSIONE()
+Value Integer   FILE_ONLY
+Value Integer   SUBDIRECTORIES
+Value Integer   SORT
     Local Char      COMANDO(250)
     PATH = filpath(PATH,"","")
     COMANDO = "dir"

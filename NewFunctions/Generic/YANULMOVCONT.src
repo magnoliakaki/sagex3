@@ -8,16 +8,21 @@ Funprog ANNULLO_MOVCONTABILE(TIPO,MOVIMENTO)
 Value Char TIPO
 Value Char MOVIMENTO
 
-    Local Char YTIPO(10)     : YTIPO = TIPO
-    Local Char YMOVIMENTO(50): YMOVIMENTO = MOVIMENTO
+    Local Char YTIPO(10)     
+    [L]YTIPO = TIPO
 
-    If clalev([F:HAE])=0 : Local File GACCENTRY  [HAE] : Endif
+    Local Char YMOVIMENTO(50)
+    [L]YMOVIMENTO = MOVIMENTO
+
+    # Tabelle che è necessario avere aperte
+    If clalev([F:HAE])=0 : Local File GACCENTRY [HAE] : Endif
     If clalev([F:DAE])=0 : Local File GACCENTRYD [DAE] : Endif
     If clalev([F:DAA])=0 : Local File GACCENTRYA [DAA] : Endif
     If clalev([F:DUD])=0 : Local File GACCDUDATE [DUD] : Endif
-    If clalev([F:TVD])=0 : Local File TRCVCRDOC  [TVD] : Endif
-    If clalev([F:BAL])=0 : Local File BALANCE    [BAL] : Endif
-    If clalev([F:BLA])=0 : Local File BALANA    [BLA] : Endif
-    If clalev([F:XDP])=0 : Local File XXI001XDP    [XDP] : Endif
-    Call ANUPCE(YTIPO,YMOVIMENTO,0) From ANUBIC
-End GOK
+    If clalev([F:TVD])=0 : Local File TRCVCRDOC [TVD] : Endif
+    If clalev([F:BAL])=0 : Local File BALANCE [BAL] : Endif
+    If clalev([F:BLA])=0 : Local File BALANA [BLA] : Endif
+    If clalev([F:XDP])=0 : Local File XXI001XDP [XDP] : Endif
+
+    Call ANUPCE([L]YTIPO,[L]YMOVIMENTO,0) From ANUBIC
+End [V]GOK

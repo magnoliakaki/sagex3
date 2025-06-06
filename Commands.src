@@ -1,0 +1,44 @@
+## --------------------------------------------------------
+## Infbox
+## --------------------------------------------------------
+
+# Show a pop-up window with the message "hello"
+Infbox 'hello'
+
+# Show a pop-up window titled "title" with the message "hello" 
+Infbox 'hello' Titled 'title'
+
+## --------------------------------------------------------
+## Execsql
+## --------------------------------------------------------
+
+Local Char DATABASE_TYPE(1)
+[L]DATABASE_TYPE = '3' # Oracle
+[L]DATABASE_TYPE = '5' # SQLserver
+
+Local Char B (250) (10)
+[L]B(0) = "Update ITMMASTER set ITMSTA_0 = 1 where ITMREF_0 = 'product'"
+
+# You can also use a clbfile 
+Local Clbfile C (2) 
+[L]C = "Update ITMMASTER set ITMSTA_0 = 1 where ITMREF_0 = 'product'"
+
+# Launch the query defined in B, used when there's no need to check the response
+Execsql from A Sql B(0..9)
+
+# Example with clbfile 
+Execsql from A Sql C 
+
+# The variable adxsqlrec is equal to the number of rows affected  
+Infbox num$(adxsqlrec) 
+
+## --------------------------------------------------------
+## Affzo / zonsui 
+## --------------------------------------------------------
+
+# Affzo is used to refresh a mask 
+Affzo [M:SDH1]
+
+# Zonsui tells X3 on which field the cursor needs to go after tabbing on the current field
+# An affzo after a zonsui resets the command
+zonsui = 'BPCORD'

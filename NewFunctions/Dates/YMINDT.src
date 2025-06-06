@@ -1,0 +1,23 @@
+#############################################################
+# Funprog MIN_DT returns integer
+# Returns the number of minutes between two datetimes.
+# @param    DT1 (datetime) 
+# @param    DT2 (datetime)
+
+Funprog MIN_DT(DT1,DT2)
+Value Datetime DT1
+Value Datetime DT2
+
+  Local Char TIM1(8), TIM2(8)
+  [L]TIM1 = func SUBADC.TIM_DATETIME([L]DT1)
+  [L]TIM2 = func SUBADC.TIM_DATETIME([L]DT2)
+
+  Local Integer SEC1, SEC2, MIN1, MIN2, HOU1, HOU2
+  [L]HOU1 = val(mid$([L]TIM1, 1, 2)) *60 *60
+  [L]MIN1 = val(mid$([L]TIM1, 4, 2)) *60
+  [L]SEC1 = val(mid$([L]TIM1, 7, 2))
+  [L]HOU2 = val(mid$([L]TIM2, 1, 2)) *60 *60
+  [L]MIN2 = val(mid$([L]TIM2, 4, 2)) * 60
+  [L]SEC2 = val(mid$([L]TIM2, 7, 2))
+
+End abs(([L]HOU1 + [L]MIN1 + [L]SEC1)-([L]HOU2 + [L]MIN2 + [L]SEC2))

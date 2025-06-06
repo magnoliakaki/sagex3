@@ -11,13 +11,16 @@ Value Integer NOJOB
     Local Char RETOUR(250)(1..5)
     Local Char SERVEUR1(GLONAMC)
     Local Integer OK
-    Call AVERTIR(mess(123,105,1) - "Job " + num$(NOJOB), OK) From GESECRAN
-    If OK<>2 : End : Endif
-    SERVEUR1 = SERVEUR
-    If right$(SERVEUR, len(SERVEUR)) <> "@" 
-        SERVEUR1 = SERVEUR + "@" 
+    Call AVERTIR(mess(123,105,1) - "Job " + num$[L]NOJOB), OK) From GESECRAN
+
+    If [L]OK <> 2 : End : Endif
+
+    [L]SERVEUR1 = [L]SERVEUR
+    
+    If right$([L]SERVEUR, len([L]SERVEUR)) <> "@" 
+        [L]SERVEUR1 = [L]SERVEUR + "@" 
     Endif
+    
     Callui RETOUR = SERVEUR1    With "SRVAction=" + chr$(1) + "DeleteRptJob",
 &   "SRVRptJobId=" + chr$(1) + num$(NOJOB)
-    # Gosub CHARGJOBSERV
 End
