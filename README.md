@@ -1,53 +1,34 @@
 # Sage X3
 
-Useful Sage X3 ERP code.
+Useful Sage X3 ERP code. This repository collects 4GL examples, custom functions, action scripts, and other useful snippets for Sage X3 ERP development.
 
-## 4GL examples
+---
 
-[Action: SEL_TABLE](4GL_examples/SEL_TABLE.src)
+## Table of Contents
 
-## Functions
+- [Overview](#overview)
+- [Repository Structure](#repository-structure)
+  - [Actions](#actions)
+  - [DevelopmentsExamples](#developmentsexamples)
+  - [NewFunctions](#newfunctions)
+  - [Commands.src](#commandssrc)
+  - [README.md](#readmemd)
+- [Functions Reference](#functions-reference)
+  - [Date Utilities](#date-utilities)
+  - [File Utilities](#file-utilities)
+  - [String Utilities](#string-utilities)
+  - [Generic Procedures](#generic-procedures)
+  - [External Libraries](#external-libraries)
+- [4GL Examples](#4gl-examples)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Dates
+---
 
-[Funprog NMONTH(Name of the month, language)](Functions/Dates/YNMONTH.src)
+## Overview
 
-Returns the number of a month, given the name in a language.
+The **Sage X3** repository aims to centralize commonly used 4GL/Progress code snippets, custom functions, and action scripts for Sage X3 ERP. It is intended to accelerate development by providing tested routines for dates, file operations, string manipulation, and more. 
 
-[Funprog MIN_DT(Datetime 1, Datetime 2)](Functions/Dates/YMINDT.src)
 
-Returns the number of minutes between two datetimes.
-
-[Funprog GET_EASTER(Year)](Functions/Dates/YGETEASTER.src)
-
-Returns Easter day for the given year.
-
-### Files
-
-[Funprog GET_FILE_IN_DIRECTORY(Path, Files prefix, Files ext, Files only, Subdirectories yes/no, Sort yes/no)](Functions/Files/YGETFILEINDIRECTORY.src)
-
-Returns the SYSTEME2 parameter (i.e. the cmd command) to find all files in a directory.
-
-### Strings
-
-[Subprog CUTSEW(List of strings to modify, list of characters to find)](Functions/Strings/YCUTSEW.src)
-
-Removes all patterns found in the 2nd parameter from the string (or list of strings) in the first parameter.
-
-[Funprog ISITSPECIAL(String to check)](Functions/Strings/YISITSPECIAL.src)
-
-Checks wether a strings contains a special character.
-
-### Generic
-
-[Funprog ANNULLO_MOVCONTABILE(Tipo, Numero movimento)](Functions/Generic/YANULMOVCONT.src)
-
-(ITA) Annulla un movimento contabile, dato il numero ed il tipo.
-
-[Subprog SUPIMPREQ(Print server, job number)](Functions/Generic/YKILLPRINTSERV.src)
-
-Kills a print job.
-
-### Other libraries
-
-[A pure SAGE X3 4GL XML parser.](https://github.com/mc996/mcmaticaX3/blob/main/XMLPARSER/README.md)
